@@ -5,11 +5,19 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accountBalance:14568.27
+    }
+  };
+
   render() {
+    const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={HomeComponent}/>
         </Switch>
       </Router>
     );
