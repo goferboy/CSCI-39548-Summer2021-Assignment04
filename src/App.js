@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/Home.js';
 import UserProfile from './components/UserProfile.js';
 import LogIn from './components/LogIn.js';
+import Debits from './components/Debits.js';
+import Credits from './components/Credits.js';
 import './App.css';
 
 
@@ -12,7 +14,7 @@ class App extends Component {
     this.state = {
       accountBalance: 0.0,
       currentUser: {
-        userName: '',
+        userName: 'test',
         memberSince: '07/01/1990',
         loggedIn: false
       },
@@ -90,15 +92,24 @@ class App extends Component {
       <LogIn 
         user={this.state.currentUser} 
         mockLogIn={this.mockLogIn} />);
-    
+    const CreditsComponent = () => (
+      <Credits
+        userName={this.state.currentUser.userName} 
+        credits={this.state.credits}/>);
+    const DebitsComponent = () => (
+      <Debits
+        userName={this.state.currentUser.userName} 
+        debits={this.state.debits}/>);
     return (
       <div>
-      <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button>
+      {/* <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button> */}
       <Router>
         <Switch>
           <Route exact path="/" render={HomeComponent}/>
           <Route exact path={"/user/" + this.state.currentUser.userName} render={UserProfileComponent}/>
           <Route exact path="/login" render={LogInComponent}/>
+          <Route exact path={"/user/" + this.state.currentUser.userName + "/credits"} render={CreditsComponent}/>
+          <Route exact path={"/user/" + this.state.currentUser.userName + "/debits"} render={DebitsComponent}/>
         </Switch>
       </Router>
       </div>
