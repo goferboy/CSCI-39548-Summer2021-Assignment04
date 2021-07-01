@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
+import AccountBalance from './AccountBalance';
 
 class Summary extends Component {
     render() {
@@ -29,6 +30,7 @@ class Summary extends Component {
                         }
                     </tbody>
                 </Table>
+                <AccountBalance accountBalance={this.props.accountBalance}/>
                 <Link to="/">Return to Home</Link>
             </div>
         );

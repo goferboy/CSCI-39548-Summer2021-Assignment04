@@ -100,11 +100,13 @@ class App extends Component {
     const CreditsComponent = () => (
       <Summary
         sumType="Credits"
+        accountBalance={this.state.accountBalance}
         userName={this.state.currentUser.userName} 
         summary={this.state.credits}/>);
     const DebitsComponent = () => (
       <Summary
         sumType="Debits"
+        accountBalance={this.state.accountBalance}
         userName={this.state.currentUser.userName} 
         summary={this.state.debits}/>);
     return (
