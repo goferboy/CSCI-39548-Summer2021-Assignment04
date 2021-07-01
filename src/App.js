@@ -13,10 +13,46 @@ class App extends Component {
       accountBalance:14568.27,
       currentUser: {
         userName: 'Bobby',
-        memberSince: '01/01/1990'
-      }
+        memberSince: '01/01/1990',
+        loggedIn: false
+      },
+      debits: [],
+      credits: []
+    };
+  };
+
+  fetchDebits = async () => {
+    try {
+      await fetch("https://moj-api.herokuapp.com/debits").then(res => {
+        return res.json();
+      }).then(debitsArray => {
+        this.setState({debits: debitsArray});
+        console.log(this.state.debits);
+      });
+    }
+    catch(error) {
+      console.log(error);
     }
   };
+
+  fetchCredits = async () => {
+    try {
+      await fetch("https://moj-api.herokuapp.com/credits").then(res => {
+        return res.json();
+      }).then(creditsArray => {
+        this.setState({credits: creditsArray});
+        console.log(this.state.credits);
+      });
+    }
+    catch(error) {
+      console.log(error);
+    }
+  };
+
+  componentDidMount() {
+    this.fetchCredits();
+    this.fetchDebits();
+  }
 
   mockLogIn = (logInInfo) => {
     const newUser = {...this.state.currentUser}
