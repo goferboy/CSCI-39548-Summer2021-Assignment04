@@ -22,22 +22,6 @@ class App extends Component {
     };
   };
 
-  fetchDebits = async () => {
-    try {
-      await fetch("https://moj-api.herokuapp.com/debits").then(res => {
-        return res.json();
-      }).then(debitsArray => {
-        debitsArray.sort((a, b) => {
-          return Date.parse(a.date) - Date.parse(b.date);
-        });
-        this.setState({debits: debitsArray});
-      });
-    }
-    catch(error) {
-      console.log(error);
-    }
-  };
-
   fetchCredits = async () => {
     try {
       await fetch("https://moj-api.herokuapp.com/credits").then(res => {
@@ -46,7 +30,7 @@ class App extends Component {
         creditsArray.sort((a, b) => {
             return Date.parse(a.date) - Date.parse(b.date);
         });
-        this.setState({credits: creditsArray});
+        this.setState({credits: creditsArray}, this.calculateBalance);
       });
     }
     catch(error) {
@@ -54,18 +38,33 @@ class App extends Component {
     }
   };
 
-  calculateBalance = async () => {
+  fetchDebits = async () => {
+    try {
+      await fetch("https://moj-api.herokuapp.com/debits").then(res => {
+        return res.json();
+      }).then(debitsArray => {
+        debitsArray.sort((a, b) => {
+          return Date.parse(a.date) - Date.parse(b.date);
+        });
+        this.setState({debits: debitsArray}, this.calculateBalance);
+      });
+    }
+    catch(error) {
+      console.log(error);
+    }
+  };
+
+
+  calculateBalance = () => {
     const creditsTotal = this.state.credits.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.amount;
     }, 0);
     const debitsTotal = this.state.debits.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.amount;
     }, 0);
-    // console.log(parseFloat(Number(creditsTotal).toFixed(2) - Number(debitsTotal).toFixed(2)).toFixed(2));
     this.setState({
       accountBalance: parseFloat(Number(creditsTotal).toFixed(2) - Number(debitsTotal).toFixed(2)).toFixed(2)
     });
-    console.log(this.state.accountBalance);
   }
 
   componentDidMount() {
@@ -79,6 +78,24 @@ class App extends Component {
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser});
     this.calculateBalance();
+  }
+
+  addCredit = (newCreditObj) => {
+    let newCredit = [...this.state.credits];
+    newCredit.push(newCreditObj);
+    console.log(newCredit);
+    this.setState({
+      credits: newCredit,
+    }, this.calculateBalance);
+  }
+
+  addDebit = (newDebitObj) => {
+    console.log(newDebitObj);
+    let newDebit = [...this.state.debits];
+    newDebit.push(newDebitObj);
+    this.setState({
+      debits: newDebit
+    }, this.calculateBalance);
   }
 
   render() {
@@ -102,13 +119,15 @@ class App extends Component {
         sumType="Credits"
         accountBalance={this.state.accountBalance}
         userName={this.state.currentUser.userName} 
-        summary={this.state.credits}/>);
+        summary={this.state.credits}
+        add={this.addCredit}/>);
     const DebitsComponent = () => (
       <Summary
         sumType="Debits"
         accountBalance={this.state.accountBalance}
         userName={this.state.currentUser.userName} 
-        summary={this.state.debits}/>);
+        summary={this.state.debits}
+        add={this.addDebit}/>);
     return (
       <div>
       {/* <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button> */}
