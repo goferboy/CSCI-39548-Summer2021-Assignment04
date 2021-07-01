@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AccountBalance from './AccountBalance.js';
 import { Link, Redirect } from 'react-router-dom';
-    
+import "./Home.css";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +24,7 @@ class Home extends Component {
     return (
         <div id="home">
           <h1>Bank of React</h1>
+          <img id="money-bag" src="/money_bag.svg"/>
           {
             this.props.loggedIn 
             ?
