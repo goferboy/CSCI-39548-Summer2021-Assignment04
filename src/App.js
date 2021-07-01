@@ -130,16 +130,15 @@ class App extends Component {
         add={this.addDebit}/>);
     return (
       <div>
-      {/* <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button> */}
-      <Router>
-        <Switch>
-          <Route exact path="/CSCI-39548-Summer2021-Assignment04/" render={HomeComponent}/>
-          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName} render={UserProfileComponent}/>
-          <Route exact path="/CSCI-39548-Summer2021-Assignment04/login" render={LogInComponent}/>
-          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/credits"} render={CreditsComponent}/>
-          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/debits"} render={DebitsComponent}/>
-        </Switch>
-      </Router>
+        <Router>
+          <Switch>
+            <Route exact path="/CSCI-39548-Summer2021-Assignment04/" render={HomeComponent}/>
+            <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName} render={UserProfileComponent}/>
+            <Route exact path="/CSCI-39548-Summer2021-Assignment04/login" render={LogInComponent}/>
+            <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/credits"} render={CreditsComponent}/>
+            <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/debits"} render={DebitsComponent}/>
+          </Switch>
+        </Router>
       </div>
     )
   }
