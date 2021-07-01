@@ -1,10 +1,19 @@
 body {
-    background-color: #fff7f7;
+    background-color: #F6E1BB;
     color: #204969;
     text-align: center;
 }
 
 button {
-    background-color: #08ffc8;
-    color: #204969;
+    font-size: 20px;
+    background-color: #204969;
+    color: #fff7f7;
+    padding: 10px 15px 10px 15px;
+    border-radius: 15px;
+    border: none;
+    transition: ease-out 0.3s;
+}
+
+button:hover {
+    background-color: #558D3D;
 }
