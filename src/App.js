@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accountBalance: 14568.27,
+      accountBalance: 0.0,
       currentUser: {
         userName: '',
         memberSince: '07/01/1990',
@@ -27,7 +27,6 @@ class App extends Component {
         return res.json();
       }).then(debitsArray => {
         this.setState({debits: debitsArray});
-        console.log(this.state.debits);
       });
     }
     catch(error) {
@@ -41,7 +40,6 @@ class App extends Component {
         return res.json();
       }).then(creditsArray => {
         this.setState({credits: creditsArray});
-        console.log(this.state.credits);
       });
     }
     catch(error) {
@@ -49,22 +47,39 @@ class App extends Component {
     }
   };
 
+  calculateBalance = async () => {
+    const creditsTotal = this.state.credits.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.amount;
+    }, 0);
+    const debitsTotal = this.state.debits.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.amount;
+    }, 0);
+    // console.log(parseFloat(Number(creditsTotal).toFixed(2) - Number(debitsTotal).toFixed(2)).toFixed(2));
+    this.setState({
+      accountBalance: parseFloat(Number(creditsTotal).toFixed(2) - Number(debitsTotal).toFixed(2)).toFixed(2)
+    });
+    console.log(this.state.accountBalance);
+  }
+
   componentDidMount() {
     this.fetchCredits();
     this.fetchDebits();
   }
-
+  
   mockLogIn = (logInInfo) => {
-    let newUser = {...this.state.currentUser};
+    const newUser = {...this.state.currentUser};
     newUser.loggedIn = true;
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser});
+    this.calculateBalance();
   }
 
   render() {
     const HomeComponent = () => (
       <Home 
-        accountBalance={this.state.accountBalance} 
+        accountBalance={this.state.accountBalance}
+        credits={this.state.credits}
+        debits={this.state.debits} 
         userName={this.state.currentUser.userName} 
         loggedIn={this.state.currentUser.loggedIn}/>);
     const UserProfileComponent = () => (
@@ -77,6 +92,8 @@ class App extends Component {
         mockLogIn={this.mockLogIn} />);
     
     return (
+      <div>
+      <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button>
       <Router>
         <Switch>
           <Route exact path="/" render={HomeComponent}/>
@@ -84,7 +101,8 @@ class App extends Component {
           <Route exact path="/login" render={LogInComponent}/>
         </Switch>
       </Router>
-    );
+      </div>
+    )
   }
 }
 
