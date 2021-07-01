@@ -1,11 +1,17 @@
 body {
+    font-family: 'Castoro', serif;
     background-color: #F6E1BB;
     color: #204969;
     text-align: center;
 }
 
+h1 {
+    font-size: 40px;
+}
+
 button {
     font-size: 20px;
+    font-family: 'PT Sans', sans-serif;
     background-color: #204969;
     color: #fff7f7;
     padding: 10px 15px 10px 15px;
