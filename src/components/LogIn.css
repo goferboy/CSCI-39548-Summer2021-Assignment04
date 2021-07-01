@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+#login-form {
+    display: flex;
+    flex-flow: column wrap;
+    width: 400px;
+    align-items: center;
+}
+
+.form-entry {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.form-entry input {
+    width: 70%;
+}
+
+#login-submit {
+    width: 200px;
+    margin: 20px;
+}

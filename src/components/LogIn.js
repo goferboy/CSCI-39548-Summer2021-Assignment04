@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import "./LogIn.css";
 
 class LogIn extends Component {
   constructor(props) {
@@ -34,16 +35,17 @@ class LogIn extends Component {
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="userName">User Name</label>
+        <h1>Bank of React</h1>
+        <form id="login-form" onSubmit={this.handleSubmit}>
+          <div className="form-entry">
+            <label htmlFor="userName">Username: </label>
             <input type="text" name="userName" onChange={this.handleChange} value={this.state.user.userName} />
           </div>
-          <div>
-            <label htmlFor="password">Password</label>
+          <div className="form-entry">
+            <label htmlFor="password">Password: </label>
             <input type="password" name="password" />
           </div>
-          <button>Submit</button>
+          <button id="login-submit">Submit</button>
         </form>
       </div>
     )
