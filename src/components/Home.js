@@ -29,8 +29,9 @@ class Home extends Component {
             this.props.loggedIn 
             ?
               <div id="user-account">
-                <Link to={"/user/" + this.props.userName}>User Profile</Link>
+                <h1>Welcome Back {this.props.userName}!</h1>
                 <AccountBalance accountBalance={this.props.accountBalance}/>
+                <Link to={"/user/" + this.props.userName}>User Profile</Link>
                 <Link to={"/user/" + this.props.userName + "/credits"}>Credits</Link>
                 <Link to={"/user/" + this.props.userName + "/debits"}>Debits</Link>
               </div> 
