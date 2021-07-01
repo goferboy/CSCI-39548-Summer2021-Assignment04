@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AccountBalance from './AccountBalance';
 
 class Summary extends Component {
@@ -67,7 +67,7 @@ class Summary extends Component {
                     <input type="text" onChange={this.handleChange} name="description" value={this.state.description}/>
                     <label>Amount</label>
                     <input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
-                    <button color="black">Submit</Button>
+                    <button color="black">Submit</button>
                 </form>
                 <Link to="/">Return to Home</Link>
             </div>
