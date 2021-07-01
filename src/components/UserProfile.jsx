@@ -16,7 +16,7 @@ class UserProfile extends Component {
 
   render() {
     if (this.state.redirect) {
-      return (<Redirect to="/"/>);
+      return (<Redirect to="/CSCI-39548-Summer2021-Assignment04/"/>);
     }
     return (
         <div>

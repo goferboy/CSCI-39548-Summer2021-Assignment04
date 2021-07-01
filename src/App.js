@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home.js';
-import UserProfile from './components/UserProfile.js';
-import LogIn from './components/LogIn.js';
-import Summary from './components/Summary.js';
+import Home from './components/Home.jsx';
+import UserProfile from './components/UserProfile.jsx';
+import LogIn from './components/LogIn.jsx';
+import Summary from './components/Summary.jsx';
 import './App.css';
 
 
@@ -133,11 +133,11 @@ class App extends Component {
       {/* <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button> */}
       <Router>
         <Switch>
-          <Route exact path="/" render={HomeComponent}/>
-          <Route exact path={"/user/" + this.state.currentUser.userName} render={UserProfileComponent}/>
-          <Route exact path="/login" render={LogInComponent}/>
-          <Route exact path={"/user/" + this.state.currentUser.userName + "/credits"} render={CreditsComponent}/>
-          <Route exact path={"/user/" + this.state.currentUser.userName + "/debits"} render={DebitsComponent}/>
+          <Route exact path="/CSCI-39548-Summer2021-Assignment04/" render={HomeComponent}/>
+          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName} render={UserProfileComponent}/>
+          <Route exact path="/CSCI-39548-Summer2021-Assignment04/login" render={LogInComponent}/>
+          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/credits"} render={CreditsComponent}/>
+          <Route exact path={"/CSCI-39548-Summer2021-Assignment04/user/" + this.state.currentUser.userName + "/debits"} render={DebitsComponent}/>
         </Switch>
       </Router>
       </div>

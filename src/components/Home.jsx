@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import AccountBalance from './AccountBalance.js';
+import AccountBalance from './AccountBalance.jsx';
 import { Redirect } from 'react-router-dom';
 import "./Home.css";
+import moneyBag from '../money_bag.svg';
 
 class Home extends Component {
   constructor(props) {
@@ -19,12 +20,12 @@ class Home extends Component {
 
   render() {
     if (this.state.redirect) {
-      return (<Redirect to={"/" + this.state.redirect}/>);
+      return (<Redirect to={"/CSCI-39548-Summer2021-Assignment04/" + this.state.redirect}/>);
     }
     return (
         <div id="home">
           <h1>Bank of React</h1>
-          <img id="money-bag" src="/money_bag.svg"/>
+          <img id="money-bag" src={moneyBag}/>
           {
             this.props.loggedIn 
             ?

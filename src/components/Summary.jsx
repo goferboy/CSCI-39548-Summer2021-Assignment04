@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import AccountBalance from './AccountBalance';
+import AccountBalance from './AccountBalance.jsx';
 import "./Summary.css";
 
 class Summary extends Component {
@@ -45,7 +45,7 @@ class Summary extends Component {
 
     render() {
         if (this.state.redirect)
-            return (<Redirect to="/"/>);
+            return (<Redirect to="/CSCI-39548-Summer2021-Assignment04/"/>);
         return (
             <div className="summary-page">
                 <h1>{this.props.sumType} Page</h1>
