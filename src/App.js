@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/Home.js';
 import UserProfile from './components/UserProfile.js';
 import LogIn from './components/LogIn.js';
-import Debits from './components/Debits.js';
-import Credits from './components/Credits.js';
+import Summary from './components/Summary.js';
 import './App.css';
 
 
@@ -28,6 +27,9 @@ class App extends Component {
       await fetch("https://moj-api.herokuapp.com/debits").then(res => {
         return res.json();
       }).then(debitsArray => {
+        debitsArray.sort((a, b) => {
+          return Date.parse(a.date) - Date.parse(b.date);
+        });
         this.setState({debits: debitsArray});
       });
     }
@@ -41,6 +43,9 @@ class App extends Component {
       await fetch("https://moj-api.herokuapp.com/credits").then(res => {
         return res.json();
       }).then(creditsArray => {
+        creditsArray.sort((a, b) => {
+            return Date.parse(a.date) - Date.parse(b.date);
+        });
         this.setState({credits: creditsArray});
       });
     }
@@ -93,13 +98,15 @@ class App extends Component {
         user={this.state.currentUser} 
         mockLogIn={this.mockLogIn} />);
     const CreditsComponent = () => (
-      <Credits
+      <Summary
+        sumType="Credits"
         userName={this.state.currentUser.userName} 
-        credits={this.state.credits}/>);
+        summary={this.state.credits}/>);
     const DebitsComponent = () => (
-      <Debits
+      <Summary
+        sumType="Debits"
         userName={this.state.currentUser.userName} 
-        debits={this.state.debits}/>);
+        summary={this.state.debits}/>);
     return (
       <div>
       {/* <button onClick={(event) => {console.log(this.state.credits); console.log(this.state.debits); this.calculateBalance();}}>test</button> */}
