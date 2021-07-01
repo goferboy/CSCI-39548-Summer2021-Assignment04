@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AccountBalance from './AccountBalance.js';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import "./Home.css";
 
 class Home extends Component {
