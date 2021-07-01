@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { Table, Form, Button, Input } from 'semantic-ui-react';
 import AccountBalance from './AccountBalance';
 
 class Summary extends Component {
@@ -40,7 +39,7 @@ class Summary extends Component {
         return (
             <div>
                 <p>{this.props.sumType} Page</p>
-                <Table>
+                <table>
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -61,15 +60,15 @@ class Summary extends Component {
                             })
                         }
                     </tbody>
-                </Table>
+                </table>
                 <AccountBalance accountBalance={this.props.accountBalance}/>
-                <Form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <label>Description</label>
-                    <Input type="text" onChange={this.handleChange} name="description" value={this.state.description}/>
+                    <input type="text" onChange={this.handleChange} name="description" value={this.state.description}/>
                     <label>Amount</label>
-                    <Input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
-                    <button>Submit</button>
-                </Form>
+                    <input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
+                    <button color="black">Submit</Button>
+                </form>
                 <Link to="/">Return to Home</Link>
             </div>
         );
