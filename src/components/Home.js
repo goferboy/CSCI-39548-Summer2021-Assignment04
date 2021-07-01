@@ -7,8 +7,18 @@ class Home extends Component {
     return (
         <div id="home">
           <h1>Bank of React</h1>
-          <Link to={"/user/" + this.props.userName}>User Profile</Link>
-          <AccountBalance accountBalance={this.props.accountBalance}/>
+          {
+            this.props.loggedIn 
+            ?
+              <div id="user-account">
+                <Link to={"/user/" + this.props.userName}>User Profile</Link>
+                <AccountBalance accountBalance={this.props.accountBalance}/>
+              </div> 
+            :
+              <div>
+                <Link to={"/login"}>Log In</Link>
+              </div>
+          }
         </div>
     );
   }
