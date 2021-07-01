@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import AccountBalance from './AccountBalance';
+import "./Summary.css";
 
 class Summary extends Component {
     constructor(props) {
@@ -9,7 +10,8 @@ class Summary extends Component {
             newEntry: {
                 description: '',
                 amount: 0.00
-            }
+            },
+            redirect: false
         }
     }
 
@@ -35,26 +37,34 @@ class Summary extends Component {
         this.props.add(newEntryObj);
     }
 
+    handleClick = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
     render() {
+        if (this.state.redirect)
+            return (<Redirect to="/"/>);
         return (
-            <div>
-                <p>{this.props.sumType} Page</p>
+            <div className="summary-page">
+                <h1>{this.props.sumType} Page</h1>
                 <table>
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>Description</th>
-                            <th>Amount</th>
+                            <th style={{textAlign: "right"}}>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             this.props.summary.map((entry) => {
                                 return (
-                                    <tr key={entry.id}>
+                                    <tr key={entry.id} className={"row-shade-" + this.props.summary.indexOf(entry) % 2}>
                                         <td>{entry.date.substring(0, 10)}</td>
-                                        <td>{entry.description}</td>
-                                        <td>{Number(entry.amount).toFixed(2)}</td>
+                                        <td className="desc-cell">{entry.description}</td>
+                                        <td className="amount-cell">{"$" + Number(entry.amount).toFixed(2)}</td>
                                     </tr>
                                 );
                             })
@@ -62,14 +72,18 @@ class Summary extends Component {
                     </tbody>
                 </table>
                 <AccountBalance accountBalance={this.props.accountBalance}/>
-                <form onSubmit={this.handleSubmit}>
-                    <label>Description</label>
-                    <input type="text" onChange={this.handleChange} name="description" value={this.state.description}/>
-                    <label>Amount</label>
-                    <input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
-                    <button color="black">Submit</button>
+                <form className="add-form" onSubmit={this.handleSubmit}>
+                    <div className="form-entry">
+                        <label>Description</label>
+                        <input className="form-entry" type="text" onChange={this.handleChange} name="description" value={this.state.description}/>
+                    </div>
+                    <div className="form-entry">
+                        <label>Amount</label>
+                        <input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
+                    </div>
+                    <button id="submit" color="black">Submit</button>
                 </form>
-                <Link to="/">Return to Home</Link>
+                <button onClick={this.handleClick}>Return Home</button>
             </div>
         );
     }

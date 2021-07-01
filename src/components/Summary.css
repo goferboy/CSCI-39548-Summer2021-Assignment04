@@ -1,0 +1,55 @@
+.summary-page {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+thead {
+    color: white;
+    background-color: #204969;
+}
+
+tr {
+    text-align: left;
+}
+
+.desc-cell {
+    width: 450px;
+}
+
+.amount-cell {
+    text-align: right;
+}
+
+.row-shade-0 {
+    background-color: #DBC394;
+}
+
+.row-shade-1 {
+    background-color: #F29E72;
+}
+
+.add-form {
+    display: flex;
+    flex-flow: column wrap;
+    width: 400px;
+    align-items: center;
+}
+
+.form-entry {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.form-entry input {
+    width: 70%;
+}
+
+#submit, #return-home {
+    width: 200px;
+    margin: 20px;
+}
