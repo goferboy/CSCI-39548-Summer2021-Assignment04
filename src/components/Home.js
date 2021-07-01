@@ -30,10 +30,12 @@ class Home extends Component {
             ?
               <div id="user-account">
                 <h1>Welcome Back {this.props.userName}!</h1>
+                <button name={"user/" + this.props.userName} onClick={this.handleClick}>User Profile</button>
                 <AccountBalance accountBalance={this.props.accountBalance}/>
-                <Link to={"/user/" + this.props.userName}>User Profile</Link>
-                <Link to={"/user/" + this.props.userName + "/credits"}>Credits</Link>
-                <Link to={"/user/" + this.props.userName + "/debits"}>Debits</Link>
+                <div id="summaries">
+                  <button name={"user/" + this.props.userName + "/credits"} onClick={this.handleClick}>Credits</button>
+                  <button name={"user/" + this.props.userName + "/debits"} onClick={this.handleClick}>Debits</button>
+                </div>
               </div> 
             :
               <div>
