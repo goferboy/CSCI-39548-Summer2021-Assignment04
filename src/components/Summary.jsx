@@ -56,7 +56,11 @@ class Summary extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {
+                        {   //Maps each entry of the credits/debits array to row with a cell for:
+                            //date, description, and amount
+                            //Each row is assigned a row-shade-0 or row-shade-0, based on their
+                            //index value % 2. 
+                            //Date is also formated to show only calendar date, for readability
                             this.props.summary.map((entry) => {
                                 return (
                                     <tr key={entry.id} className={"row-shade-" + this.props.summary.indexOf(entry) % 2}>
@@ -79,7 +83,7 @@ class Summary extends Component {
                         <label>Amount</label>
                         <input type="number" onChange={this.handleChange} name="amount" value={this.state.amount} min="0" step="0.01"/>
                     </div>
-                    <button id="submit" color="black">Submit</button>
+                    <button id="submit">Submit</button>
                 </form>
                 <button onClick={this.handleClick}>Return Home</button>
             </div>

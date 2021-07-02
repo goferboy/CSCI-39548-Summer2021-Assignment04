@@ -6,6 +6,7 @@ class LogIn extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      //User object is used to store input values as they change
       user: {
         userName: '',
         password: ''
@@ -14,6 +15,8 @@ class LogIn extends Component {
     }
   }
 
+  //by passing the event.target.name, allows handleChange listener to 
+  //work on multiple input fields
   handleChange = (event) => {
     const updatedUser = {...this.state.user};
     const inputField = event.target.name;

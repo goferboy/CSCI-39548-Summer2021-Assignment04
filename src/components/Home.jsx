@@ -8,10 +8,14 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //state.redirect holds a string value to allow Redirect based on
+      //which button is clicked
       redirect: ''
     }
   }
 
+  //click listener for all of the buttons, changes based
+  //on the button element's name property
   handleClick = (event) => {
     this.setState({
       redirect: event.target.name
@@ -27,6 +31,7 @@ class Home extends Component {
           <h1>Bank of React</h1>
           <img id="money-bag" src={moneyBag}/>
           {
+            //rendering is done based on if a user is logged in or not
             this.props.loggedIn 
             ?
               <div id="user-account">

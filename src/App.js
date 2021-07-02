@@ -6,14 +6,13 @@ import LogIn from './components/LogIn.jsx';
 import Summary from './components/Summary.jsx';
 import './App.css';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       accountBalance: 0.0,
       currentUser: {
-        userName: 'test',
+        userName: '',
         memberSince: '07/01/1990',
         loggedIn: false
       },
@@ -21,12 +20,15 @@ class App extends Component {
       credits: []
     };
   };
-
+  
+  //Fetches credit array from fetch api call and adds it to the state.
   fetchCredits = async () => {
     try {
       await fetch("https://moj-api.herokuapp.com/credits").then(res => {
         return res.json();
       }).then(creditsArray => {
+        //Sorting is down after fetch call, sorted by date, from earliest
+        //to latest
         creditsArray.sort((a, b) => {
             return Date.parse(a.date) - Date.parse(b.date);
         });
@@ -38,11 +40,14 @@ class App extends Component {
     }
   };
 
+  //Fetches credit array from fetch api call and adds it to the state.
   fetchDebits = async () => {
     try {
       await fetch("https://moj-api.herokuapp.com/debits").then(res => {
         return res.json();
       }).then(debitsArray => {
+        //Sorting is down after fetch call, sorted by date, from earliest
+        //to latest
         debitsArray.sort((a, b) => {
           return Date.parse(a.date) - Date.parse(b.date);
         });
@@ -54,7 +59,8 @@ class App extends Component {
     }
   };
 
-
+  //Helper function to calculate the account balance
+  //Total Amount of Credits - Total Amount of Debits = Account Balance
   calculateBalance = () => {
     const creditsTotal = this.state.credits.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.amount;
@@ -63,6 +69,8 @@ class App extends Component {
       return accumulator + currentValue.amount;
     }, 0);
     this.setState({
+      //Both totals are converted to string objects then parsed back to a float
+      //to ensure correct calculations when adding credits and debits
       accountBalance: parseFloat(Number(creditsTotal).toFixed(2) - Number(debitsTotal).toFixed(2)).toFixed(2)
     });
   }
@@ -72,6 +80,7 @@ class App extends Component {
     this.fetchDebits();
   }
   
+  //After a user logs on, account balance is calculated
   mockLogIn = (logInInfo) => {
     const newUser = {...this.state.currentUser};
     newUser.loggedIn = true;
@@ -83,6 +92,9 @@ class App extends Component {
   addCredit = (newCreditObj) => {
     let newCredit = [...this.state.credits];
     newCredit.push(newCreditObj);
+    //calculateBalace is a call back for setState() to ensure
+    //up to date calculation and not wait for the component
+    //to re-render with updated state.
     this.setState({
       credits: newCredit,
     }, this.calculateBalance);
@@ -91,6 +103,9 @@ class App extends Component {
   addDebit = (newDebitObj) => {
     let newDebit = [...this.state.debits];
     newDebit.push(newDebitObj);
+    //calculateBalace is a call back for setState() to ensure
+    //up to date calculation and not wait for the component
+    //to re-render with updated state.
     this.setState({
       debits: newDebit
     }, this.calculateBalance);
@@ -126,6 +141,8 @@ class App extends Component {
         userName={this.state.currentUser.userName} 
         summary={this.state.debits}
         add={this.addDebit}/>);
+    
+    //path's have hardcoded route's in order for GitHub Pages deployment to work properly
     return (
       <div>
         <Router>
@@ -141,6 +158,5 @@ class App extends Component {
     )
   }
 }
-
 
 export default App;
