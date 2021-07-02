@@ -17,7 +17,6 @@ class Summary extends Component {
 
     handleChange = (event) => {
         const updatedEntry = {...this.state.newEntry};
-        console.log(event.target.name, event.target.value);
         updatedEntry[event.target.name] = event.target.value;
         this.setState({newEntry: updatedEntry});
     }
@@ -33,7 +32,6 @@ class Summary extends Component {
             amount: amountFormat,
             description: this.state.newEntry.description
         };
-        console.log(newEntryObj);
         this.props.add(newEntryObj);
     }
 

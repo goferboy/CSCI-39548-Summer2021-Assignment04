@@ -83,14 +83,12 @@ class App extends Component {
   addCredit = (newCreditObj) => {
     let newCredit = [...this.state.credits];
     newCredit.push(newCreditObj);
-    console.log(newCredit);
     this.setState({
       credits: newCredit,
     }, this.calculateBalance);
   }
 
   addDebit = (newDebitObj) => {
-    console.log(newDebitObj);
     let newDebit = [...this.state.debits];
     newDebit.push(newDebitObj);
     this.setState({
